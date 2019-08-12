@@ -4,17 +4,51 @@
   "description": "Express middleware for Barong Authorizer",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "**/*.+(js|md|ts||yml|yaml|json)": [
+      "eslint --fix",
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn precommit"
+    }
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/openware/node-auth-barong.git"
   },
-  "keywords": ["jwt","verify","authorize","barong"],
+  "keywords": [
+    "jwt",
+    "verify",
+    "authorize",
+    "barong"
+  ],
   "author": "Openware",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/openware/node-auth-barong/issues"
   },
-  "homepage": "https://github.com/openware/node-auth-barong#readme"
+  "homepage": "https://github.com/openware/node-auth-barong#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "eslint": "^6.1.0",
+    "eslint-config-standard": "^13.0.1",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-mocha": "^6.0.0",
+    "eslint-plugin-node": "^9.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "husky": "^3.0.3",
+    "lint-staged": "^9.2.1",
+    "mocha": "^6.2.0",
+    "prettier": "^1.18.2"
+  }
 }
