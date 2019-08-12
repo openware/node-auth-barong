@@ -5,6 +5,7 @@
 var barongJWTAuthorizer = require("../lib");
 var assert = require("assert");
 var mocha = require("mocha");
+var http = require("http");
 var expect = require("chai").expect;
 var describe = mocha.describe;
 var it = mocha.it;
@@ -30,5 +31,20 @@ describe("verify()", function() {
     expect(() =>
       barongJWTAuthorizer.verify("jwt_wrong_format", "public_key_wrong_format")
     ).to.throw("JsonWebTokenError: jwt malformed");
+  });
+});
+
+describe("getAuthHeader()", function() {
+  it("should raise an error if there's no Auth header", function() {
+    expect(() => barongJWTAuthorizer.getAuthHeader(http.get())).to.throw(
+      "No Authorization header present"
+    );
+  });
+
+  it("should return Authorization header", function() {
+    var req = JSON.parse(
+      '{ "url": "/test", "method": "POST", "headers": { "authorization": "Bearer token" }}'
+    );
+    expect(barongJWTAuthorizer.getAuthHeader(req)).to.equal("token");
   });
 });
