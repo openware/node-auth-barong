@@ -4,7 +4,8 @@
   "description": "Express middleware for Barong Authorizer",
   "main": "index.js",
   "scripts": {
-    "precommit": "lint-staged"
+    "test": "./node_modules/.bin/mocha",
+    "precommit": "lint-staged && npm test"
   },
   "lint-staged": {
     "**/*.+(js|md|ts||yml|yaml|json)": [
