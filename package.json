@@ -9,7 +9,7 @@
     "precommit": "npm test && lint-staged"
   },
   "lint-staged": {
-    "**/*.+(js|md|ts||yml|yaml|json)": [
+    "**/*.+(js|ts|yml|yaml|json)": [
       "eslint --fix",
       "prettier --write",
       "git add"

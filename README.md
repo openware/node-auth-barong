@@ -3,7 +3,7 @@
 Middleware that validates JsonWebTokens returned from barong and sets `req.session`.
 
 This module lets you validate JWT from HTTP requests using `jsonwebtoken` library in your Node.js
-applications. JWTs are typically used to protect API endpoints. 
+applications. JWTs are typically used to protect API endpoints.
 
 ## Install
 
@@ -15,7 +15,7 @@ The JWT authentication middleware authenticates Barong session using a JWT.
 If the token is valid, `req.session` will be set with the JSON object decoded
 to be used by later middleware for authorization and access control.
 
-Example of `req.session` object: 
+Example of `req.session` object:
 
 ```
 { iat: 1565687278,
@@ -54,6 +54,17 @@ barongJwt({ barongJwtPublicKey: 'decoded public key',
   issuer: 'http://issuer' })
 ```
 
+Available options for verification:
+
+  * algorithms: List of strings with the names of the allowed algorithms. For instance, ["HS256", "HS384"].
+  * audience: if you want to check audience (aud), provide a value here. The audience can be checked against a string, a regular expression or a list of strings and/or regular expressions. Eg: "urn:foo", /urn:f[o]{2}/, [/urn:f[o]{2}/, "urn:bar"]
+  * issuer (optional): string or array of strings of valid values for the iss field.
+  * ignoreExpiration: if true do not validate the expiration of the token.
+  * subject: if you want to check subject (sub), provide a value here
+  * clockTolerance: number of seconds to tolerate when checking the nbf and exp claims, to deal with small clock differences among different servers
+  * maxAge: the maximum allowed age for tokens to still be valid. It is expressed in seconds or a string describing a time span zeit/ms. Eg: 1000, "2 days", "10h", "7d". A numeric value is interpreted as a seconds count. If you use a string be sure you provide the time units (days, hours, etc), otherwise milliseconds unit is used by default ("120" is equal to "120ms").
+  * clockTimestamp: the time in seconds that should be used as the current time for all necessary comparisons.
+
 > If the JWT has an expiration (`exp`), it will be checked.
 
 If you are using a base64 URL-encoded secret, pass a `Buffer` with `base64` encoding as the secret instead of a string:
@@ -83,7 +94,7 @@ Check them out [here](https://github.com/auth0/express-jwt/graphs/contributors)
 
 ## Issue Reporting
 
-If you have found a bug or if you have a feature request, please report them at this repository issues section. Please do not report security vulnerabilities on the public GitHub issue tracker. 
+If you have found a bug or if you have a feature request, please report them at this repository issues section. Please do not report security vulnerabilities on the public GitHub issue tracker.
 
 ## Author
 
