@@ -21,7 +21,7 @@ describe("Middleware test", function() {
 
   it("should throw if barongJwtPublicKey is not sent", function() {
     try {
-      barongJWTAuthorizer(request, response);
+      barongJWTAuthorizer.sessionVerifier(request, response);
     } catch (e) {
       assert.ok(e);
       assert.strictEqual(e.message, "Barong JWT Pulic key should be set");
